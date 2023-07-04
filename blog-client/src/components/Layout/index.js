@@ -23,13 +23,21 @@ const footerStyle = {
   bottom: 0
 };
 
+const contentStyle = {
+  height: 'calc(100vh - 64px - 69px)',
+  padding: '0 50px',
+  maxWidth: '360px',
+  width: '60%',
+  margin: '0 auto'
+};
+
 export default function MainLayout() {
   return (
     <Layout>
       <Layout.Header style={headerStyle}>
         <Navbar />
       </Layout.Header>
-      <Layout.Content>
+      <Layout.Content style={contentStyle}>
         <Outlet />
       </Layout.Content>
       <Layout.Footer style={footerStyle}>this is footer</Layout.Footer>
