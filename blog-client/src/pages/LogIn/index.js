@@ -1,9 +1,13 @@
 import React from 'react';
 import { MailOutlined } from '@ant-design/icons';
-import AuthForm from '../../components/AuthForm';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import AuthForm from 'components/AuthForm';
+import { authUser } from 'app/userSlice';
 
 export default function LogIn() {
+  const dispatch = useDispatch();
+
   const fields = [
     {
       placeholder: 'Email',
@@ -20,6 +24,7 @@ export default function LogIn() {
 
   const onSubmit = data => {
     console.log(data);
+    dispatch(authUser(data));
   };
 
   return (

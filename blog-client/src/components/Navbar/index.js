@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
-import { Button, Drawer } from 'antd';
 import { MenuOutlined } from '@ant-design/icons';
-import { useLocation } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { Button, Drawer } from 'antd';
+import { useEffect, useState } from 'react';
+import { useLocation, Link } from 'react-router-dom';
 import LeftMenu from './LeftMenu';
 import RightMenu from './RightMenu';
 
@@ -17,20 +16,16 @@ const Navbar = () => {
   };
 
   const { pathname: location } = useLocation();
+
   useEffect(() => {
     setOpen(false);
   }, [location]);
 
   return (
-    // <nav className="navbar">
-    // <Layout>
-    // <Layout.Header className="nav-header">
     <nav className="navbar">
-      {/* <h3> */}
       <Link to="/" className="logo">
         {TITLE}
       </Link>
-      {/* </h3> */}
       <div className="navbar-menu">
         <div className="leftMenu">
           <LeftMenu mode="horizontal" />
@@ -55,9 +50,6 @@ const Navbar = () => {
         </Drawer>
       </div>
     </nav>
-    // </Layout.Header>
-    // </Layout>
-    // </nav>
   );
 };
 

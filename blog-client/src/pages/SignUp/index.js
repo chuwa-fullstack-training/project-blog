@@ -1,8 +1,16 @@
 import React from 'react';
 import { MailOutlined, UserOutlined, LinkOutlined } from '@ant-design/icons';
-import AuthForm from '../../components/AuthForm';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import AuthForm from 'components/AuthForm';
+import { signUpUser } from 'app/userSlice';
 
 export default function SignUp() {
+  const { status } = useSelector(state => state.user);
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const fields = [
     {
       placeholder: 'Username',
@@ -47,8 +55,11 @@ export default function SignUp() {
     }
   ];
 
-  const onSubmit = data => {
-    console.log(data);
+  const onSubmit = async data => {
+    dispatch(signUpUser(data));
+    if (status === 'succeeded') {
+      await navigate('/login');
+    }
   };
   return (
     <div>

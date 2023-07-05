@@ -2,23 +2,25 @@ import React from 'react';
 import { Menu, Avatar } from 'antd';
 import { UserOutlined, LogoutOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { logOutUser } from 'app/userSlice';
 
 const RightMenu = ({ mode }) => {
-  const { user } = useSelector(state => state.currentUser);
+  const { user, isAuthenticated } = useSelector(state => state.user);
+  const dispatch = useDispatch();
   return (
     <Menu mode={mode}>
       <Menu.SubMenu
         title={
           <>
             <Avatar icon={<UserOutlined />} />
-            <span className="username">{user.name}</span>
+            <span className="username">{user.username}</span>
           </>
         }
       >
-        {user.name ? (
+        {isAuthenticated ? (
           <>
-            <Menu.Item key="log-out">
+            <Menu.Item key="log-out" onClick={() => dispatch(logOutUser())}>
               <LogoutOutlined /> Log out
             </Menu.Item>
           </>
