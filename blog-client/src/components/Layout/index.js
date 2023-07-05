@@ -27,9 +27,7 @@ export default function MainLayout() {
   const footerStyle = useMemo(
     () => ({
       textAlign: 'center',
-      width: '100%',
-      position: 'fixed',
-      bottom: 0
+      width: '100%'
     }),
     []
   );
@@ -39,7 +37,8 @@ export default function MainLayout() {
       height: 'calc(100vh - 64px - 69px)',
       padding: '0 50px',
       width: isMobile ? '100%' : '440px',
-      margin: '0 auto'
+      margin: '0 auto',
+      overflowY: 'auto'
     }),
     [isMobile]
   );

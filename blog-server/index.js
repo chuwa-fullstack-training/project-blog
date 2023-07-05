@@ -5,6 +5,7 @@ const errorHandler = require('./handlers/error');
 const authRoutes = require('./routes/auth');
 const messageRoutes = require('./routes/messages');
 const { loginRequired, ensureCorrectUser } = require('./middleware/auth');
+const db = require('./models');
 
 const PORT = 8080;
 const app = express();

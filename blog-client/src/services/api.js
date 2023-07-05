@@ -1,8 +1,16 @@
 export default async function apiCall({ url, method, data, headers }) {
+  const defaultHeaders = {
+    'Content-Type': 'application/json'
+  };
+
+  if (localStorage.getItem('token')) {
+    defaultHeaders['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
+  }
+
   const response = await fetch(url, {
     method,
     headers: {
-      'Content-Type': 'application/json',
+      ...defaultHeaders,
       ...headers
     },
     body: JSON.stringify(data)

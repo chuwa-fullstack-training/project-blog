@@ -42,11 +42,12 @@ exports.getMessage = async function (req, res, next) {
 exports.deleteMessage = async function (req, res, next) {
   try {
     // find the message by id
+    console.log(req.params);
     const foundMessage = await db.Message.findById(req.params.message_id);
     // !! not using findByIdAndRemove because we have the pre remove hook in models/messages.js
 
     // remove the message
-    await foundMessage.remove();
+    await foundMessage.deleteOne();
     // return a success message
     return res.status(200).json(foundMessage);
   } catch (err) {

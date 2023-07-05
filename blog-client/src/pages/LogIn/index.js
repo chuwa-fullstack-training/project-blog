@@ -1,12 +1,13 @@
-import React from 'react';
 import { MailOutlined } from '@ant-design/icons';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import AuthForm from 'components/AuthForm';
 import { authUser } from 'app/userSlice';
 
 export default function LogIn() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const fields = [
     {
@@ -24,7 +25,9 @@ export default function LogIn() {
 
   const onSubmit = data => {
     console.log(data);
-    dispatch(authUser(data));
+    dispatch(authUser(data)).then(() => {
+      navigate(location.state?.from || '/');
+    });
   };
 
   return (
