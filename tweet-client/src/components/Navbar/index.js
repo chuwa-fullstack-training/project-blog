@@ -7,7 +7,7 @@ import RightMenu from './RightMenu';
 
 import './style.css';
 
-const TITLE = 'Blog';
+const TITLE = 'Mini Tweet';
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);

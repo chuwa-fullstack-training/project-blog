@@ -69,7 +69,12 @@ export default function MessageList() {
                 </Button>
               ]
             }
-            extra={<IconText icon={LikeOutlined} text="9" />}
+            extra={
+              <IconText
+                icon={LikeOutlined}
+                text={Math.floor(Math.random() * 100 + 1)}
+              />
+            }
           >
             <Skeleton
               avatar

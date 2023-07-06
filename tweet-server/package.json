@@ -1,5 +1,5 @@
 {
-  "name": "warbler-server",
+  "name": "tweet-server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",

@@ -6,8 +6,6 @@ import AuthForm from 'components/AuthForm';
 import { signUpUser } from 'app/userSlice';
 
 export default function SignUp() {
-  const { status } = useSelector(state => state.user);
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -55,18 +53,15 @@ export default function SignUp() {
     }
   ];
 
-  const onSubmit = async data => {
-    dispatch(signUpUser(data));
-    if (status === 'succeeded') {
-      await navigate('/login');
-    }
+  const onSubmit = data => {
+    dispatch(signUpUser(data)).then(() => navigate('/login'));
   };
   return (
     <div>
       <AuthForm
         buttonText="Sign up"
         onSubmit={onSubmit}
-        title="Welcome to the wonderful Blog!"
+        title="Welcome to the wonderful Mini Tweet Land!"
         fields={fields}
       />
     </div>
