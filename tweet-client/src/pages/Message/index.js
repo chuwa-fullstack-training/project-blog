@@ -3,8 +3,24 @@ import { List, Avatar, Skeleton, Space, Button, Typography, Modal } from 'antd';
 import { LikeOutlined } from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux';
 import dayjs from 'dayjs';
+import { useQuery } from 'graphql-hooks';
 import { fetchMessagesAction, deleteMessageAction } from 'app/messageSlice';
 import styles from './style.module.css';
+
+const MESSAGE_QUERY = `
+  query {
+    messages {
+      id
+      text
+      createdAt
+      user {
+        id
+        username
+        profileImageUrl
+      }
+    }
+  }
+`;
 
 const IconText = ({ icon, text }) => (
   <Space>
@@ -15,8 +31,10 @@ const IconText = ({ icon, text }) => (
 
 export default function MessageList() {
   const dispatch = useDispatch();
-  const { messages, status } = useSelector(state => state.messages);
   const { user } = useSelector(state => state.user);
+
+  const { loading, error, data } = useQuery(MESSAGE_QUERY);
+  const messages = data?.messages || [];
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [messageId, setMessageId] = useState(null);
@@ -37,13 +55,16 @@ export default function MessageList() {
     });
   };
 
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error :(</p>;
+
   return (
     <>
       <List
         className={styles.list}
         itemLayout="vertical"
         size="large"
-        loading={status === 'pending'}
+        loading={loading}
         pagination={{
           onChange: page => {
             console.log(page);
@@ -55,7 +76,7 @@ export default function MessageList() {
           <List.Item
             key={idx}
             actions={
-              user.id === item.user._id && [
+              user.id === item.user.id && [
                 <Button type="link" key="edit" size="small">
                   edit
                 </Button>,
@@ -66,7 +87,7 @@ export default function MessageList() {
             }
             extra={<IconText icon={LikeOutlined} text={Math.floor(Math.random() * 100 + 1)} />}
           >
-            <Skeleton avatar title={false} loading={status === 'pending'} active>
+            <Skeleton avatar title={false} loading={loading} active>
               <List.Item.Meta
                 avatar={<Avatar src={item.user.profileImageUrl} size="large" />}
                 title={item.user.username}
@@ -82,7 +103,7 @@ export default function MessageList() {
         open={isModalOpen}
         onCancel={() => setIsModalOpen(false)}
         onOk={handleDelete}
-        confirmLoading={status === 'pending'}
+        confirmLoading={loading}
       >
         <p>Are you sure you want to delete this message?</p>
       </Modal>

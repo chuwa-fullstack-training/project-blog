@@ -1,13 +1,30 @@
 import React from 'react';
 import { MailOutlined, UserOutlined, LinkOutlined } from '@ant-design/icons';
-import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useMutation } from 'graphql-hooks';
 import AuthForm from 'components/AuthForm';
-import { signUpUser } from 'app/userSlice';
+
+const USER_SIGNUP_MUTATION = `
+  mutation($email: String!, $username: String!, $password: String!, $profileImageUrl: String) {
+    signUp(email: $email, username: $username, password: $password, profileImageUrl: $profileImageUrl) {
+      user {
+        id
+        username
+        profileImageUrl
+      }
+      token
+    }
+  }
+`;
 
 export default function SignUp() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+
+  const [signUp, { loading, error }] = useMutation(USER_SIGNUP_MUTATION, {
+    onSuccess: () => {
+      navigate('/login');
+    }
+  });
 
   const fields = [
     {
@@ -54,7 +71,8 @@ export default function SignUp() {
   ];
 
   const onSubmit = data => {
-    dispatch(signUpUser(data)).then(() => navigate('/login'));
+    // dispatch(signUpUser(data)).then(() => navigate('/login'));
+    signUp({ variables: data });
   };
   return (
     <div>
@@ -63,6 +81,7 @@ export default function SignUp() {
         onSubmit={onSubmit}
         title="Welcome to the wonderful Mini Tweet Land!"
         fields={fields}
+        loading={loading}
       />
     </div>
   );
