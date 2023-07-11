@@ -1,7 +1,6 @@
 import React from 'react';
 import { Button, Form, Input, Typography } from 'antd';
 import { LockOutlined } from '@ant-design/icons';
-import { useSelector } from 'react-redux';
 import styles from './style.module.css';
 
 export default function AuthForm({
@@ -9,10 +8,9 @@ export default function AuthForm({
   onSubmit,
   title,
   fields,
+  loading,
   errors
 }) {
-  const { status } = useSelector(state => state.user);
-
   return (
     <>
       <Typography className={styles.title}>{title}</Typography>
@@ -40,7 +38,7 @@ export default function AuthForm({
             htmlType="submit"
             className={styles.btn}
             size="large"
-            loading={status === 'pending'}
+            loading={loading}
           >
             {buttonText}
           </Button>
