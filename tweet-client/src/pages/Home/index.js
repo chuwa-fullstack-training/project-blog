@@ -10,5 +10,10 @@ export default function Home() {
     return <Navigate to="/login" state={{ from: '/' }} />;
   }
 
-  return <MessageTimeline />;
+  return (
+    <div>
+      <h1>Home</h1>
+      <MessageTimeline />
+    </div>
+  );
 }
