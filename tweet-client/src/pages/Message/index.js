@@ -50,7 +50,7 @@ export default function MessageList() {
           },
           pageSize: 4
         }}
-        dataSource={messages}
+        dataSource={messages.filter(message => message.user)}
         renderItem={(item, idx) => (
           <List.Item
             key={idx}
