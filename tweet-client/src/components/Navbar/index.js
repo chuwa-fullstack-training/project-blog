@@ -37,14 +37,7 @@ const Navbar = () => {
           <RightMenu mode="horizontal" />
         </div>
 
-        <Drawer
-          title={TITLE}
-          placement="right"
-          closable={true}
-          onClose={showDrawer}
-          open={open}
-          style={{ zIndex: 99 }}
-        >
+        <Drawer title={TITLE} placement="right" closable={true} onClose={showDrawer} open={open} style={{ zIndex: 99 }}>
           <LeftMenu mode="inline" />
           <RightMenu mode="inline" />
         </Drawer>

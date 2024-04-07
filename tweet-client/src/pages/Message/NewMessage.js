@@ -9,11 +9,9 @@ export default function NewMessage() {
   const { user } = useSelector(state => state.user);
 
   const handleSubmit = data => {
-    dispatch(createMessageAction({ userId: user.id, text: data.text })).then(
-      () => {
-        navigate('/');
-      }
-    );
+    dispatch(createMessageAction({ userId: user.id, text: data.text })).then(() => {
+      navigate('/');
+    });
   };
 
   return <MessageForm onSubmit={handleSubmit} />;

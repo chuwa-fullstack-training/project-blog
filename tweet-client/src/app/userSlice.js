@@ -8,36 +8,30 @@ export const initialState = {
   status: 'idle'
 };
 
-export const authUser = createAsyncThunk(
-  'currentUser/authUser',
-  async (data, thunkAPI) => {
-    try {
-      const user = await signIn(data);
-      localStorage.setItem('token', user.token);
-      thunkAPI.dispatch(removeError());
-      return user;
-    } catch (error) {
-      const { message } = error;
-      thunkAPI.dispatch(addError(message));
-      return thunkAPI.rejectWithValue(message);
-    }
+export const authUser = createAsyncThunk('currentUser/authUser', async (data, thunkAPI) => {
+  try {
+    const user = await signIn(data);
+    localStorage.setItem('token', user.token);
+    thunkAPI.dispatch(removeError());
+    return user;
+  } catch (error) {
+    const { message } = error;
+    thunkAPI.dispatch(addError(message));
+    return thunkAPI.rejectWithValue(message);
   }
-);
+});
 
-export const signUpUser = createAsyncThunk(
-  'currentUser/signUpUser',
-  async (data, thunkAPI) => {
-    try {
-      const user = await signUp(data);
-      thunkAPI.dispatch(removeError());
-      return user;
-    } catch (error) {
-      const { message } = error;
-      thunkAPI.dispatch(addError(message));
-      return thunkAPI.rejectWithValue(message);
-    }
+export const signUpUser = createAsyncThunk('currentUser/signUpUser', async (data, thunkAPI) => {
+  try {
+    const user = await signUp(data);
+    thunkAPI.dispatch(removeError());
+    return user;
+  } catch (error) {
+    const { message } = error;
+    thunkAPI.dispatch(addError(message));
+    return thunkAPI.rejectWithValue(message);
   }
-);
+});
 
 const currentUserSlice = createSlice({
   name: 'currentUser',

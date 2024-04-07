@@ -1,7 +1,4 @@
-const BASE_URL =
-  process.env.NODE_ENV === 'production'
-    ? 'https://chuwaweb.com'
-    : 'http://localhost:8080';
+const BASE_URL = process.env.NODE_ENV === 'production' ? 'https://chuwaweb.com' : 'http://localhost:8080';
 
 export default async function apiCall({ url: apiUrl, method, data, headers }) {
   const url = new URL(apiUrl, BASE_URL).href;

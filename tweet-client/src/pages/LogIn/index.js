@@ -32,12 +32,7 @@ export default function LogIn() {
 
   return (
     <div>
-      <AuthForm
-        buttonText="Log in"
-        onSubmit={onSubmit}
-        title="Please log in first"
-        fields={fields}
-      />
+      <AuthForm buttonText="Log in" onSubmit={onSubmit} title="Please log in first" fields={fields} />
       <p>
         New to here? You can <Link to="/signup">sign up</Link> instead.
       </p>

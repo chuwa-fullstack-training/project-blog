@@ -7,50 +7,41 @@ const initialState = {
   status: 'idle'
 };
 
-export const fetchMessagesAction = createAsyncThunk(
-  'messages/fetchMessages',
-  async (data, thunkAPI) => {
-    try {
-      const messages = await fetchMessages(data);
-      thunkAPI.dispatch(removeError());
-      return messages;
-    } catch (error) {
-      const { message } = error;
-      thunkAPI.dispatch(addError(message));
-      return thunkAPI.rejectWithValue(message);
-    }
+export const fetchMessagesAction = createAsyncThunk('messages/fetchMessages', async (data, thunkAPI) => {
+  try {
+    const messages = await fetchMessages(data);
+    thunkAPI.dispatch(removeError());
+    return messages;
+  } catch (error) {
+    const { message } = error;
+    thunkAPI.dispatch(addError(message));
+    return thunkAPI.rejectWithValue(message);
   }
-);
+});
 
-export const createMessageAction = createAsyncThunk(
-  'messages/createMessage',
-  async (data, thunkAPI) => {
-    try {
-      const message = await createMessage(data);
-      thunkAPI.dispatch(removeError());
-      return message;
-    } catch (error) {
-      const { message } = error;
-      thunkAPI.dispatch(addError(message));
-      return thunkAPI.rejectWithValue(message);
-    }
+export const createMessageAction = createAsyncThunk('messages/createMessage', async (data, thunkAPI) => {
+  try {
+    const message = await createMessage(data);
+    thunkAPI.dispatch(removeError());
+    return message;
+  } catch (error) {
+    const { message } = error;
+    thunkAPI.dispatch(addError(message));
+    return thunkAPI.rejectWithValue(message);
   }
-);
+});
 
-export const deleteMessageAction = createAsyncThunk(
-  'messages/deleteMessage',
-  async (data, thunkAPI) => {
-    try {
-      const message = await deleteMessage(data);
-      thunkAPI.dispatch(removeError());
-      return message;
-    } catch (error) {
-      const { message } = error;
-      thunkAPI.dispatch(addError(message));
-      return thunkAPI.rejectWithValue(message);
-    }
+export const deleteMessageAction = createAsyncThunk('messages/deleteMessage', async (data, thunkAPI) => {
+  try {
+    const message = await deleteMessage(data);
+    thunkAPI.dispatch(removeError());
+    return message;
+  } catch (error) {
+    const { message } = error;
+    thunkAPI.dispatch(addError(message));
+    return thunkAPI.rejectWithValue(message);
   }
-);
+});
 
 const messageSlice = createSlice({
   name: 'messages',
@@ -84,9 +75,7 @@ const messageSlice = createSlice({
     });
     builder.addCase(deleteMessageAction.fulfilled, (state, action) => {
       state.status = 'succeeded';
-      state.messages = state.messages.filter(
-        message => message._id !== action.payload._id
-      );
+      state.messages = state.messages.filter(message => message._id !== action.payload._id);
     });
     builder.addCase(deleteMessageAction.rejected, (state, action) => {
       state.status = 'failed';

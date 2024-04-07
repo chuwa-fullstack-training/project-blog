@@ -10,12 +10,7 @@ export default function MessageForm({ onSubmit }) {
         <Input.TextArea rows={4} />
       </Form.Item>
       <Form.Item>
-        <Button
-          type="primary"
-          htmlType="submit"
-          style={{ width: '100%' }}
-          loading={status === 'pending'}
-        >
+        <Button type="primary" htmlType="submit" style={{ width: '100%' }} loading={status === 'pending'}>
           Submit
         </Button>
       </Form.Item>

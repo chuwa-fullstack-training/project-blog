@@ -59,39 +59,20 @@ export default function MessageList() {
                 <Button type="link" key="edit" size="small">
                   edit
                 </Button>,
-                <Button
-                  key="delete"
-                  type="link"
-                  size="small"
-                  onClick={showModal(item._id)}
-                >
+                <Button key="delete" type="link" size="small" onClick={showModal(item._id)}>
                   delete
                 </Button>
               ]
             }
-            extra={
-              <IconText
-                icon={LikeOutlined}
-                text={Math.floor(Math.random() * 100 + 1)}
-              />
-            }
+            extra={<IconText icon={LikeOutlined} text={Math.floor(Math.random() * 100 + 1)} />}
           >
-            <Skeleton
-              avatar
-              title={false}
-              loading={status === 'pending'}
-              active
-            >
+            <Skeleton avatar title={false} loading={status === 'pending'} active>
               <List.Item.Meta
                 avatar={<Avatar src={item.user.profileImageUrl} size="large" />}
                 title={item.user.username}
-                description={dayjs(item.createdAt).format(
-                  'YYYY-MM-DD HH:mm:ss'
-                )}
+                description={dayjs(item.createdAt).format('YYYY-MM-DD HH:mm:ss')}
               />
-              <Typography.Paragraph style={{ fontSize: '1.1rem' }}>
-                {item.text}
-              </Typography.Paragraph>
+              <Typography.Paragraph style={{ fontSize: '1.1rem' }}>{item.text}</Typography.Paragraph>
             </Skeleton>
           </List.Item>
         )}
