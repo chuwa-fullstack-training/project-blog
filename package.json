@@ -4,12 +4,16 @@
   "description": "## Description",
   "main": "index.js",
   "scripts": {
-    "prettier": "prettier --write ."
+    "prettier": "prettier --write .",
+    "start:client": "cd tweet-client && npm start",
+    "start:server": "cd tweet-server && npm start",
+    "start": "concurrently \"npm run start:client\" \"npm run start:server\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "concurrently": "^8.2.2",
     "prettier": "^3.2.5"
   }
 }
