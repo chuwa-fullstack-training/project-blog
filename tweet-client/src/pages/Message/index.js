@@ -35,6 +35,7 @@ export default function MessageList() {
 
   const { loading, error, data } = useQuery(MESSAGE_QUERY);
   const messages = data?.messages || [];
+  console.log(data, error);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [messageId, setMessageId] = useState(null);

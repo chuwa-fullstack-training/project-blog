@@ -16,7 +16,7 @@ if (localStorage.getItem('token')) {
 }
 
 const client = new GraphQLClient({
-  url: 'http://localhost:8080/graphql',
+  url: '/graphql',
   headers: {
     Authorization: `Bearer ${localStorage.getItem('token') || ''}`
   }
